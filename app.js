@@ -1,8 +1,12 @@
 import "./styles.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem("tasks");
+    return saved ? JSON.parse(saved) : [];
+  });
+
   const [input, setInput] = useState("");
 
   function addTask() {
@@ -15,6 +19,11 @@ export default function App() {
   function deleteTask(id) {
     setTasks(tasks.filter((task) => task.id !== id));
   }
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
   return (
     <div className="app">
       <h1>My Dashboard</h1>
