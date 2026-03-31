@@ -12,12 +12,20 @@ export default function App() {
   function addTask() {
     if (!input.trim()) return;
 
-    setTasks([...tasks, { id: Date.now(), text: input }]);
+    setTasks([...tasks, { id: Date.now(), text: input, completed: false }]);
     setInput("");
   }
 
   function deleteTask(id) {
     setTasks(tasks.filter((task) => task.id !== id));
+  }
+
+  function toggleTask(id) {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
   }
 
   useEffect(() => {
@@ -50,7 +58,13 @@ export default function App() {
         <ul>
           {tasks.map((task) => (
             <li key={task.id}>
-              {task.text}
+              <span
+                className={task.completed ? "completed" : ""}
+                onClick={() => toggleTask(task.id)}
+              >
+                {task.completed ? "✅" : "⬜"} {task.text}
+              </span>
+
               <button onClick={() => deleteTask(task.id)}>❌</button>
             </li>
           ))}
