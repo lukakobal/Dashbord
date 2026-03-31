@@ -47,3 +47,11 @@ li button {
   cursor: pointer;
   font-size: 16px;
 }
+span {
+  cursor: pointer;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
