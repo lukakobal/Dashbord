@@ -55,3 +55,12 @@ span {
   text-decoration: line-through;
   opacity: 0.6;
 }
+.filters {
+  margin: 10px 0;
+}
+
+.filters button {
+  margin: 0 5px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
